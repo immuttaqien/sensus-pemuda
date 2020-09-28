@@ -14,6 +14,7 @@ class Formulir extends CI_Controller {
 	public function index()
 	{
 		$this->load->view('template/v_meta');
+		$this->load->view('template/v_logo');
 		
 		$data = array(
 			'jamaah' => $this->m_formulir->daftar_jamaah()->result(),
@@ -121,6 +122,7 @@ class Formulir extends CI_Controller {
 	public function riwayat()
 	{
 		$this->load->view('template/v_meta');
+		$this->load->view('template/v_logo');
 
 		$anggota_id = $this->uri->segment('4');
 		$riwayat_id = $this->uri->segment('5');
@@ -155,7 +157,7 @@ class Formulir extends CI_Controller {
 		$this->m_formulir->input_riwayat('sn_riwayat', $data);
 
 		$_SESSION['notify']['type'] = 'success';
-		$_SESSION['notify']['message'] = 'Riwayat pendidikan berhasil ditambahkan.';
+		$_SESSION['notify']['message'] = 'Data riwayat pendidikan berhasil ditambahkan.';
 
 		header('location:'.$_SERVER['HTTP_REFERER']);
 	}
@@ -179,7 +181,7 @@ class Formulir extends CI_Controller {
 		$this->m_formulir->update_riwayat('sn_riwayat', $data, $riwayat_id);
 
 		$_SESSION['notify']['type'] = 'success';
-		$_SESSION['notify']['message'] = 'Riwayat pendidikan berhasil diedit.';
+		$_SESSION['notify']['message'] = 'Data riwayat pendidikan berhasil diedit.';
 
 		header('location:'.$_SERVER['HTTP_REFERER']);
 	}
@@ -188,7 +190,7 @@ class Formulir extends CI_Controller {
 		$this->m_formulir->delete_riwayat('sn_riwayat', $riwayat_id);
 
 		$_SESSION['notify']['type'] = 'success';
-		$_SESSION['notify']['message'] = 'Riwayat pendidikan berhasil dihapus.';
+		$_SESSION['notify']['message'] = 'Data riwayat pendidikan berhasil dihapus.';
 
 		header('location:'.$_SERVER['HTTP_REFERER']);
 	}

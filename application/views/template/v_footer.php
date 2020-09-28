@@ -1,5 +1,11 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed') ?>
 
+</div>
+<!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
 <!-- jQuery -->
 <script src="<?php echo base_url('static/vendor/jquery/jquery.min.js') ?>"></script>
 
