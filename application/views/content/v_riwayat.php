@@ -1,5 +1,9 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
 
+$page = $this->uri->segment('3');
+$anggota_id = $this->uri->segment('4');
+$riwayat_id = $this->uri->segment('5');
+
 switch($page){
 
 case 'index':
@@ -46,7 +50,7 @@ case 'index':
                         <tbody>
                             <?php
                             $i = 1;
-                            foreach($data['riwayat'] as $list){
+                            foreach($riwayat as $list){
                                 echo '<tr>
                                         <td class="center" width="10">'.$i.'</td>
                                         <td>'.$list->tingkat.'</td>
@@ -54,9 +58,12 @@ case 'index':
                                         <td>'.$list->jurusan.'</td>
                                         <td>'.$list->tahun_masuk.'</td>
                                         <td>'.$list->tahun_lulus.'</td>
-                                        <td class="center"><a href="'.base_url('formulir/riwayat/edit/'.$list->riwayat_id).'">Edit</a> | <a href="'.base_url('process/riwayat/delete/'.$list->riwayat_id).'" onclick="return confirm(\'Apakah Anda yakin akan menghapus riwayat pendidikan ini ?\')">Hapus</a></td>
+                                        <td class="center">'.anchor('formulir/riwayat/edit/'.$anggota_id.'/'.$list->riwayat_id, 'Edit').' | '.anchor('formulir/hapus_riwayat/'.$list->riwayat_id, 'Hapus', 'onclick="return confirm(\'Apakah Anda yakin akan menghapus riwayat pendidikan ini ?\')"').'</td>
                                      </tr>';
                                 $i++;
+
+                                //<a href="'.base_url('formulir/riwayat/edit/'.$anggota_id.'/'.$list->riwayat_id).'">Edit</a>
+                                //<a href="'.base_url('process/riwayat/delete/'.$list->riwayat_id).'" onclick="return confirm(\'Apakah Anda yakin akan menghapus riwayat pendidikan ini ?\')">Hapus</a>
                             }
                             ?>
                         </tbody>
@@ -113,7 +120,14 @@ case 'tambah':
                                 <h3>Data Riwayat Pendidikan</h3>
                                 <div class="form-group">
                                     <label>Tingkat</label>
-                                    <input type="text" class="form-control" name="tingkat">
+                                    <select class="form-control" name="tingkat">
+                                        <option>-- Silakan Pilih</option>
+                                        <?php
+                                        foreach($pendidikan as $d){
+                                            echo '<option value="'.$d->pendidikan_id.'">'.$d->nama.'</option>';
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Nama Sekolah</label>
@@ -133,7 +147,7 @@ case 'tambah':
                                 </div>
                                 <button type="submit" class="btn btn-primary">Tambah</button>
                                 <button type="reset" class="btn btn-default">Reset</button>
-                            <?php echo form_close(); ?>
+                            </form>
                         </div>
                         <!-- /.col-lg-6 (nested) -->
                     </div>
@@ -186,32 +200,39 @@ case 'edit':
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-6 col-md-offset-3">
-                            <?php foreach($data['edit'] as $edit){ ?>
-                            <?php echo form_open('formulir/edit_riwayat/'.$anggota_id); ?>
+                            <?php foreach($edit as $data){ ?>
+                            <?php echo form_open('formulir/edit_riwayat/'.$riwayat_id); ?>
                                 <h3>Data Riwayat Pendidikan</h3>
                                 <div class="form-group">
                                     <label>Tingkat</label>
-                                    <input type="text" class="form-control" name="tingkat" value="<?php echo $edit->tingkat ?>">
+                                    <select class="form-control" name="tingkat">
+                                        <option>-- Silakan Pilih</option>
+                                        <?php
+                                        foreach($pendidikan as $d){
+                                            echo '<option value="'.$d->pendidikan_id.'"'; if($d->pendidikan_id==$data->pendidikan_id) echo ' selected'; echo '>'.$d->nama.'</option>';
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Nama Sekolah</label>
-                                    <input type="text" class="form-control" name="nama_sekolah" value="<?php echo $edit->nama_sekolah ?>">
+                                    <input type="text" class="form-control" name="nama_sekolah" value="<?php echo $data->nama_sekolah ?>">
                                 </div>
                                 <div class="form-group">
                                     <label>Jurusan</label>
-                                    <input type="text" class="form-control" name="jurusan" value="<?php echo $edit->jurusan ?>">
+                                    <input type="text" class="form-control" name="jurusan" value="<?php echo $data->jurusan ?>">
                                 </div>
                                 <div class="form-group">
                                     <label>Tahun Masuk</label>
-                                    <input type="number" class="form-control" name="tahun_masuk" value="<?php echo $edit->tahun_masuk ?>">
+                                    <input type="number" class="form-control" name="tahun_masuk" value="<?php echo $data->tahun_masuk ?>">
                                 </div>
                                 <div class="form-group">
                                     <label>Tahun Lulus</label>
-                                    <input type="number" class="form-control" name="tahun_lulus" value="<?php echo $edit->tahun_lulus ?>">
+                                    <input type="number" class="form-control" name="tahun_lulus" value="<?php echo $data->tahun_lulus ?>">
                                 </div>
                                 <button type="submit" class="btn btn-primary">Edit</button>
                                 <button type="reset" class="btn btn-default">Reset</button>
-                            <?php echo form_close(); ?>
+                            </form>
                             <?php } ?>
                         </div>
                         <!-- /.col-lg-6 (nested) -->

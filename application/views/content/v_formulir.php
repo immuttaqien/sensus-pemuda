@@ -235,7 +235,7 @@
                                 </div>
                                 <button type="submit" class="btn btn-primary">Tambah</button>
                                 <button type="reset" class="btn btn-default">Reset</button>
-                            <?php echo form_close(); ?>
+                            </form>
                         </div>
                         <!-- /.col-lg-6 (nested) -->
                     </div>

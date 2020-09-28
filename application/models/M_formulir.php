@@ -43,7 +43,8 @@ class M_formulir extends CI_Model {
 	}
 
 	public function daftar_riwayat($anggota_id){
-		return $this->db->get_where('sn_riwayat', array('anggota_id' => $anggota_id));
+		// return $this->db->get_where('sn_riwayat', array('anggota_id' => $anggota_id));
+		return $this->db->select('a.*, b.nama AS tingkat')->from('sn_riwayat a')->join('sn_pendidikan b', 'b.pendidikan_id = a.pendidikan_id')->where('a.anggota_id', $anggota_id)->get();
 	}
 
 	public function input_riwayat($table, $data)
@@ -58,5 +59,9 @@ class M_formulir extends CI_Model {
 	public function update_riwayat($table, $data, $riwayat_id)
 	{
 		$this->db->update($table, $data, array('riwayat_id' => $riwayat_id));
+	}
+
+	public function delete_riwayat($table, $riwayat_id){
+		$this->db->delete($table, array('riwayat_id' => $riwayat_id));
 	}
 }

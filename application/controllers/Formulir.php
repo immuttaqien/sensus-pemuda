@@ -118,16 +118,20 @@ class Formulir extends CI_Controller {
 		}
 	}
 
-	public function riwayat($page='index', $anggota_id=0)
+	public function riwayat()
 	{
 		$this->load->view('template/v_meta');
 
+		$anggota_id = $this->uri->segment('4');
+		$riwayat_id = $this->uri->segment('5');
+
 		$data = array(
 			'riwayat' => $this->m_formulir->daftar_riwayat($anggota_id)->result(),
-			'edit' => $this->m_formulir->edit_riwayat($anggota_id)->result()
+			'pendidikan' => $this->m_formulir->daftar_pendidikan()->result(),
+			'edit' => $this->m_formulir->edit_riwayat($riwayat_id)->result()
 		);
 
-		$this->load->view('content/v_riwayat', array('page' => $page, 'anggota_id' => $anggota_id, 'data' => $data));
+		$this->load->view('content/v_riwayat', $data);
 		$this->load->view('template/v_footer');
 	}
 
@@ -141,7 +145,7 @@ class Formulir extends CI_Controller {
 
 		$data = array(
 			'anggota_id' => $anggota_id,
-			'tingkat' => $tingkat,
+			'pendidikan_id' => $tingkat,
 			'nama_sekolah' => $nama_sekolah,
 			'jurusan' => $jurusan,
 			'tahun_masuk' => $tahun_masuk,
@@ -165,7 +169,7 @@ class Formulir extends CI_Controller {
 		$tahun_lulus = $this->input->post('tahun_lulus');
 
 		$data = array(
-			'tingkat' => $tingkat,
+			'pendidikan_id' => $tingkat,
 			'nama_sekolah' => $nama_sekolah,
 			'jurusan' => $jurusan,
 			'tahun_masuk' => $tahun_masuk,
@@ -176,6 +180,15 @@ class Formulir extends CI_Controller {
 
 		$_SESSION['notify']['type'] = 'success';
 		$_SESSION['notify']['message'] = 'Riwayat pendidikan berhasil diedit.';
+
+		header('location:'.$_SERVER['HTTP_REFERER']);
+	}
+
+	public function hapus_riwayat($riwayat_id=0){
+		$this->m_formulir->delete_riwayat('sn_riwayat', $riwayat_id);
+
+		$_SESSION['notify']['type'] = 'success';
+		$_SESSION['notify']['message'] = 'Riwayat pendidikan berhasil dihapus.';
 
 		header('location:'.$_SERVER['HTTP_REFERER']);
 	}
