@@ -14,7 +14,7 @@
     <title>Sensus Anggota | PC. Pemuda Persis Banjaran</title>
 
 
-    <link rel="shortcut icon" href="<?php echo base_url('static/favicon.ico') ?>">
+    <!-- <link rel="shortcut icon" href="<?php echo base_url('static/favicon.ico') ?>"> -->
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url('static/vendor/bootstrap/css/bootstrap.min.css') ?>" rel="stylesheet">
 

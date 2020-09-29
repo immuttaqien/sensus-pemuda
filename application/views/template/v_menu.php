@@ -4,25 +4,31 @@
   <div class="sidebar-nav navbar-collapse">
       <ul class="nav" id="side-menu">
           <li>
-              <a href="<?php echo base_url() ?>"><i class="fa fa-home fa-fw"></i> Home</a>
+              <a href="<?php echo base_url('main') ?>"><i class="fa fa-home fa-fw"></i> Beranda</a>
           </li>
           <li>
-              <a href="<?php echo base_url('main/about') ?>"><i class="fa fa-users fa-fw"></i> About Us</a>
+              <a href="<?php echo base_url('anggota') ?>"><i class="fa fa-users fa-fw"></i> Anggota</a>
           </li>
           <li>
-              <a href="<?php echo base_url('main/projects') ?>"><i class="fa fa-briefcase fa-fw"></i> Projects</a>
-          </li>
-          <li>
-              <a href="<?php echo base_url('main/grammars') ?>"><i class="fa fa-th-large fa-fw"></i> Grammars</a>
-          </li>
-          <li>
-              <a href="<?php echo base_url('main/awards') ?>"><i class="fa fa-star fa-fw"></i> Awards</a>
-          </li>
-          <li>
-              <a href="<?php echo base_url('main/news') ?>"><i class="fa fa-pencil-square fa-fw"></i> News</a>
-          </li>
-          <li>
-              <a href="<?php echo base_url('main/contact') ?>"><i class="fa fa-envelope fa-fw"></i> Contact</a>
+              <a href="#"><i class="fa fa-database fa-fw"></i> Master Data<span class="fa arrow"></span></a>
+              <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
+                  <li>
+                      <a href="<?php echo base_url('jamaah') ?>">Jamaah</a>
+                  </li>
+                  <li>
+                      <a href="<?php echo base_url('pendidikan') ?>">Pendidikan</a>
+                  </li>
+                  <li>
+                      <a href="<?php echo base_url('pekerjaan') ?>">Pekerjaan</a>
+                  </li>
+                  <li>
+                      <a href="<?php echo base_url('pendapatan') ?>">Pendapatan</a>
+                  </li>
+                  <li>
+                      <a href="<?php echo base_url('tanggungan') ?>">Tanggungan</a>
+                  </li>
+              </ul>
+              <!-- /.nav-second-level -->
           </li>
       </ul>
   </div>

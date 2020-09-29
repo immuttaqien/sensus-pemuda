@@ -11,9 +11,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>RAW Architecture | Admin</title>
+    <title>Sensus Anggota | PC. Pemuda Persis Banjaran</title>
     
-    <link rel="shortcut icon" href="<?php echo base_url('static/favicon.ico') ?>">
+    <!-- <link rel="shortcut icon" href="<?php echo base_url('static/favicon.ico') ?>"> -->
 
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url('static/vendor/bootstrap/css/bootstrap.min.css') ?>" rel="stylesheet">
@@ -43,7 +43,7 @@
             <div class="col-md-4 col-md-offset-4">
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Please Login</h3>
+                        <h3 class="panel-title">Silakan Login</h3>
                     </div>
                     <div class="panel-body">
                         <?php
@@ -52,13 +52,13 @@
                             unset($_SESSION['notify']);
                         }            
                         ?>
-                        <form role="form" action="<?php echo site_url('process/user/login') ?>" method="post">
+                        <?php echo form_open('login/process'); ?>
                             <fieldset>
                                 <div class="form-group">
-                                    <input required="" class="form-control" placeholder="Username" name="uname" type="text" autofocus>
+                                    <input required="" class="form-control" placeholder="Username" name="username" type="text" autofocus>
                                 </div>
                                 <div class="form-group">
-                                    <input required="" class="form-control" placeholder="Password" name="pswd" type="password">
+                                    <input required="" class="form-control" placeholder="Password" name="password" type="password">
                                 </div>
                                 <!-- <div class="checkbox">
                                     <label>

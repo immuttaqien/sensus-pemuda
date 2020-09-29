@@ -1,8 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-session_start();
-
 class Formulir extends CI_Controller {
 
 	function __construct()

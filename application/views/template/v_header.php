@@ -13,7 +13,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="<?php echo base_url(); ?>">Sensus Anggota</a>
+        <a class="navbar-brand" href="<?php echo base_url('main'); ?>">Sensus Anggota</a>
     </div>
     <!-- /.navbar-header -->
 
@@ -23,9 +23,9 @@
                 <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-user">
-                <li><a href="<?php echo base_url('main/user/edit/'.$_SESSION['raw']['uid']) ?>"><i class="fa fa-gear fa-fw"></i> Setting</a></li>
+                <li><a href="<?php echo base_url('admin/edit/'.$this->session->userdata('admin_id')) ?>"><i class="fa fa-gear fa-fw"></i> Setting</a></li>
                 <li class="divider"></li>
-                <li><a href="<?php echo base_url('process/user/logout') ?>" onclick="return confirm('Are you sure you want to logout ?')"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                <li><a href="<?php echo base_url('login/logout') ?>" onclick="return confirm('Apakah Anda yakin akan logout ?')"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                 </li>
             </ul>
             <!-- /.dropdown-user -->
