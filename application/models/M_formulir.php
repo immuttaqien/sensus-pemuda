@@ -43,7 +43,6 @@ class M_formulir extends CI_Model {
 	}
 
 	public function daftar_riwayat($anggota_id){
-		// return $this->db->get_where('sn_riwayat', array('anggota_id' => $anggota_id));
 		return $this->db->select('a.*, b.nama AS tingkat')->from('sn_riwayat a')->join('sn_pendidikan b', 'b.pendidikan_id = a.pendidikan_id')->where('a.anggota_id', $anggota_id)->get();
 	}
 

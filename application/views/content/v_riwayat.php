@@ -26,7 +26,7 @@ case 'index':
         ?>
         <div class="panel panel-default">
             <div class="panel-heading">
-                Daftar Data Riwayat Pendidikan
+                Data Riwayat Pendidikan
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
