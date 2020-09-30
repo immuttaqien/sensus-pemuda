@@ -72,6 +72,28 @@ class Anggota extends CI_Controller {
 		$this->load->view('template/v_footer');
 	}
 
+	public function riwayat()
+	{
+		$this->load->view('template/v_meta');
+		$this->load->view('template/v_header');
+		$this->load->view('template/v_menu');
+
+		$page = $this->uri->segment('3');
+		$anggota_id = $this->uri->segment('4');
+		$riwayat_id = $this->uri->segment('5');
+
+		$data = array(
+			'page' => $page.'_riwayat',
+			'anggota_id' => $anggota_id,
+			'riwayat_id' => $riwayat_id,
+			'pendidikan' => $this->m_formulir->daftar_pendidikan()->result(),
+			'edit' => $this->m_formulir->edit_riwayat($riwayat_id)->result()
+		);
+
+		$this->load->view('content/v_anggota', $data);
+		$this->load->view('template/v_footer');
+	}
+
 	public function edit_anggota($anggota_id=0)
 	{
 		$nomor_anggota = $this->input->post('nomor_anggota');
@@ -170,11 +192,15 @@ class Anggota extends CI_Controller {
 		header('location:'.$_SERVER['HTTP_REFERER']);
 	}
 
-	public function hapus_anggota($riwayat_id=0){
-		$this->m_anggota->delete_anggota('sn_anggota', $riwayat_id);
+	public function hapus_anggota($anggota_id=0){
+		$foto = $this->m_anggota->get_foto($anggota_id);
+		unlink('./media/foto/'.$foto->foto);
+
+		$this->m_anggota->delete_anggota('sn_anggota', $anggota_id);
+		$this->m_anggota->delete_riwayat('sn_riwayat', $anggota_id);
 
 		$_SESSION['notify']['type'] = 'success';
-		$_SESSION['notify']['message'] = 'Data riwayat pendidikan berhasil dihapus.';
+		$_SESSION['notify']['message'] = 'Data anggota berhasil dihapus.';
 
 		header('location:'.$_SERVER['HTTP_REFERER']);
 	}

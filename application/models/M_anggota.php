@@ -23,4 +23,17 @@ class M_anggota extends CI_Model {
 	{
 		$this->db->update($table, $data, array('anggota_id' => $anggota_id));
 	}
+
+	public function get_foto($anggota_id)
+	{
+		return $this->db->select('foto')->from('sn_anggota')->where('anggota_id', $anggota_id)->get()->row();
+	}
+
+	public function delete_anggota($table, $anggota_id){
+		$this->db->delete($table, array('anggota_id' => $anggota_id));
+	}
+
+	public function delete_riwayat($table, $anggota_id){
+		$this->db->delete($table, array('anggota_id' => $anggota_id));
+	}
 }

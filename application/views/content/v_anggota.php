@@ -48,7 +48,7 @@ case 'index':
                                     <td>'.$list->nama_lengkap.'</td>
                                     <td>'.$list->jamaah.'</td>
                                     <td class="center"><a target="_blank" href="'.base_url('media/foto/'.$list->foto).'">Lihat Foto</a></td>
-                                    <td class="center">'.anchor('anggota/detail/'.$list->anggota_id, 'Detail').' | '.anchor('anggota/edit/'.$list->anggota_id, 'Edit').' | '.anchor('anggota/hapus/'.$list->anggota_id, 'Hapus', 'onclick="return confirm(\'Apakah Anda yakin akan menghapus data anggota ini ?\')"').'</td>
+                                    <td class="center">'.anchor('anggota/detail/'.$list->anggota_id, 'Detail').' | '.anchor('anggota/edit/'.$list->anggota_id, 'Edit').' | '.anchor('anggota/hapus_anggota/'.$list->anggota_id, 'Hapus', 'onclick="return confirm(\'Apakah Anda yakin akan menghapus data anggota ini ?\')"').'</td>
                                  </tr>';
                             $i++;
                         }
@@ -604,7 +604,7 @@ if(isset($_SESSION['notify'])){
         </div>
         <!-- /.panel -->
 
-        <h2 style="text-align: right;"><a href="<?php echo base_url('anggota/tambah_riwayat/'.$anggota_id) ?>" class="btn btn-primary">+ Tambah</a></h2>
+        <h2 style="text-align: right;"><a href="<?php echo base_url('anggota/riwayat/tambah/'.$anggota_id) ?>" class="btn btn-primary">+ Tambah</a></h2>
         
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -635,7 +635,7 @@ if(isset($_SESSION['notify'])){
                                     <td>'.$list->jurusan.'</td>
                                     <td>'.$list->tahun_masuk.'</td>
                                     <td>'.$list->tahun_lulus.'</td>
-                                    <td class="center">'.anchor('formulir/riwayat/edit/'.$anggota_id.'/'.$list->riwayat_id, 'Edit').' | '.anchor('formulir/hapus_riwayat/'.$list->riwayat_id, 'Hapus', 'onclick="return confirm(\'Apakah Anda yakin akan menghapus data riwayat pendidikan ini ?\')"').'</td>
+                                    <td class="center">'.anchor('anggota/riwayat/edit/'.$anggota_id.'/'.$list->riwayat_id, 'Edit').' | '.anchor('formulir/hapus_riwayat/'.$list->riwayat_id, 'Hapus', 'onclick="return confirm(\'Apakah Anda yakin akan menghapus data riwayat pendidikan ini ?\')"').'</td>
                                  </tr>';
                             $i++;
                         }
@@ -646,6 +646,158 @@ if(isset($_SESSION['notify'])){
             </div>
             <!-- /.panel-body -->
         </div>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+
+<?php
+break;
+
+case 'tambah_riwayat':
+?>
+
+<div id="page-wrapper">
+<div class="row">
+    <div class="col-lg-12">
+        <h2 class="page-header">Tambah Data Riwayat Pendidikan <a href="<?php echo base_url('anggota/edit/'.$anggota_id) ?>" class="btn btn-primary" style="float:right"><i class="fa fa-angle-double-left"></i> Kembali</a></h2>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+<?php
+if(isset($_SESSION['notify'])){
+    echo '<div class="alert alert-'.$_SESSION['notify']['type'].' alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>'.$_SESSION['notify']['message'].'</div>';
+    unset($_SESSION['notify']);
+}            
+?>
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Form Tambah Data Riwayat Pendidikan
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <?php echo form_open('formulir/tambah_riwayat/'.$anggota_id); ?>
+                            <h3>Data Riwayat Pendidikan</h3>
+                            <div class="form-group">
+                                <label>Tingkat</label>
+                                <select class="form-control" name="tingkat" required="">
+                                    <option>-- Silakan Pilih</option>
+                                    <?php
+                                    foreach($pendidikan as $d){
+                                        echo '<option value="'.$d->pendidikan_id.'">'.$d->nama.'</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Nama Sekolah</label>
+                                <input type="text" class="form-control" name="nama_sekolah" required="">
+                            </div>
+                            <div class="form-group">
+                                <label>Jurusan</label>
+                                <input type="text" class="form-control" name="jurusan">
+                            </div>
+                            <div class="form-group">
+                                <label>Tahun Masuk</label>
+                                <input type="number" class="form-control" name="tahun_masuk">
+                            </div>
+                            <div class="form-group">
+                                <label>Tahun Lulus</label>
+                                <input type="number" class="form-control" name="tahun_lulus">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Tambah</button>
+                            <button type="reset" class="btn btn-default">Reset</button>
+                        </form>
+                    </div>
+                    <!-- /.col-lg-6 (nested) -->
+                </div>
+                <!-- /.row (nested) -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+
+<?php
+break;
+
+case 'edit_riwayat':
+?>
+
+<div id="page-wrapper">
+<div class="row">
+    <div class="col-lg-12">
+        <h2 class="page-header">Edit Data Riwayat Pendidikan <a href="<?php echo base_url('anggota/edit/'.$anggota_id) ?>" class="btn btn-primary" style="float:right"><i class="fa fa-angle-double-left"></i> Kembali</a></h2>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+<?php
+if(isset($_SESSION['notify'])){
+    echo '<div class="alert alert-'.$_SESSION['notify']['type'].' alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>'.$_SESSION['notify']['message'].'</div>';
+    unset($_SESSION['notify']);
+}            
+?>
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Form Edit Data Riwayat Pendidikan
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <?php foreach($edit as $data){ ?>
+                        <?php echo form_open('formulir/edit_riwayat/'.$riwayat_id); ?>
+                            <h3>Data Riwayat Pendidikan</h3>
+                            <div class="form-group">
+                                <label>Tingkat</label>
+                                <select class="form-control" name="tingkat" required="">
+                                    <option>-- Silakan Pilih</option>
+                                    <?php
+                                    foreach($pendidikan as $d){
+                                        echo '<option value="'.$d->pendidikan_id.'"'; if($d->pendidikan_id==$data->pendidikan_id) echo ' selected'; echo '>'.$d->nama.'</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Nama Sekolah</label>
+                                <input type="text" class="form-control" name="nama_sekolah" value="<?php echo $data->nama_sekolah ?>" required="">
+                            </div>
+                            <div class="form-group">
+                                <label>Jurusan</label>
+                                <input type="text" class="form-control" name="jurusan" value="<?php echo $data->jurusan ?>">
+                            </div>
+                            <div class="form-group">
+                                <label>Tahun Masuk</label>
+                                <input type="number" class="form-control" name="tahun_masuk" value="<?php echo $data->tahun_masuk ?>">
+                            </div>
+                            <div class="form-group">
+                                <label>Tahun Lulus</label>
+                                <input type="number" class="form-control" name="tahun_lulus" value="<?php echo $data->tahun_lulus ?>">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Edit</button>
+                            <button type="reset" class="btn btn-default">Reset</button>
+                        </form>
+                        <?php } ?>
+                    </div>
+                    <!-- /.col-lg-6 (nested) -->
+                </div>
+                <!-- /.row (nested) -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
     </div>
     <!-- /.col-lg-12 -->
 </div>
