@@ -225,7 +225,7 @@ if(isset($_SESSION['notify'])){
                             </div>
                             <div class="form-group">
                                 <label>Jumlah Anak</label>
-                                <input type="text" class="form-control" name="jumlah_anak">
+                                <input type="number" class="form-control" name="jumlah_anak">
                             </div>
                             <button type="submit" class="btn btn-primary">Lanjutkan</button>
                             <button type="reset" class="btn btn-default">Reset</button>
