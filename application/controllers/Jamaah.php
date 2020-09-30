@@ -51,7 +51,7 @@ class Jamaah extends CI_Controller {
 		$data = array(
 			'page' => 'edit',
 			'jamaah_id' => $jamaah_id,
-			'edit' => $this->m_jamaah->edit_jamaah($jamaah_id)
+			'edit' => $this->m_jamaah->edit_jamaah($jamaah_id)->row()
 		);
 
 		$this->load->view('content/v_jamaah', $data);
@@ -68,8 +68,8 @@ class Jamaah extends CI_Controller {
 
 		$this->m_jamaah->input_jamaah('sn_jamaah', $data);
 
-		$_SESSION['notify']['type'] = 'success';
-		$_SESSION['notify']['message'] = 'Data jamaah berhasil ditambah.';
+		$this->session->set_flashdata('type', 'success');
+		$this->session->set_flashdata('message', 'Data jamaah berhasil ditambah.');
 
 		header('location:'.$_SERVER['HTTP_REFERER']);
 	}
@@ -83,18 +83,18 @@ class Jamaah extends CI_Controller {
 		);
 
 		$this->m_jamaah->update_jamaah('sn_jamaah', $data, $jamaah_id);
-
-		$_SESSION['notify']['type'] = 'success';
-		$_SESSION['notify']['message'] = 'Data jamaah berhasil diedit.';
+		
+		$this->session->set_flashdata('type', 'success');
+		$this->session->set_flashdata('message', 'Data jamaah berhasil diedit.');
 
 		header('location:'.$_SERVER['HTTP_REFERER']);
 	}
 
 	public function hapus_jamaah($jamaah_id=0){
 		$this->m_jamaah->delete_jamaah('sn_jamaah', $jamaah_id);
-
-		$_SESSION['notify']['type'] = 'success';
-		$_SESSION['notify']['message'] = 'Data jamaah berhasil dihapus.';
+		
+		$this->session->set_flashdata('type', 'success');
+		$this->session->set_flashdata('message', 'Data jamaah berhasil dihapus.');
 
 		header('location:'.$_SERVER['HTTP_REFERER']);
 	}

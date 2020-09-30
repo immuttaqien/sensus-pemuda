@@ -14,7 +14,7 @@ class M_pendapatan extends CI_Model {
 
 	public function edit_pendapatan($pendapatan_id)
 	{
-		return $this->db->get_where('sn_pendapatan', array('pendapatan_id' => $pendapatan_id))->row();
+		return $this->db->get_where('sn_pendapatan', array('pendapatan_id' => $pendapatan_id));
 	}
 
 	public function update_pendapatan($table, $data, $pendapatan_id)

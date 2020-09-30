@@ -51,7 +51,7 @@ class Pekerjaan extends CI_Controller {
 		$data = array(
 			'page' => 'edit',
 			'pekerjaan_id' => $pekerjaan_id,
-			'edit' => $this->m_pekerjaan->edit_pekerjaan($pekerjaan_id)
+			'edit' => $this->m_pekerjaan->edit_pekerjaan($pekerjaan_id)->row()
 		);
 
 		$this->load->view('content/v_pekerjaan', $data);
@@ -67,9 +67,9 @@ class Pekerjaan extends CI_Controller {
 		);
 
 		$this->m_pekerjaan->input_pekerjaan('sn_pekerjaan', $data);
-
-		$_SESSION['notify']['type'] = 'success';
-		$_SESSION['notify']['message'] = 'Data pekerjaan berhasil ditambah.';
+		
+		$this->session->set_flashdata('type', 'success');
+		$this->session->set_flashdata('message', 'Data pekerjaan berhasil ditambah.');
 
 		header('location:'.$_SERVER['HTTP_REFERER']);
 	}
@@ -83,18 +83,18 @@ class Pekerjaan extends CI_Controller {
 		);
 
 		$this->m_pekerjaan->update_pekerjaan('sn_pekerjaan', $data, $pekerjaan_id);
-
-		$_SESSION['notify']['type'] = 'success';
-		$_SESSION['notify']['message'] = 'Data pekerjaan berhasil diedit.';
+		
+		$this->session->set_flashdata('type', 'success');
+		$this->session->set_flashdata('message', 'Data pendidikan berhasil diedit.');
 
 		header('location:'.$_SERVER['HTTP_REFERER']);
 	}
 
 	public function hapus_pekerjaan($pekerjaan_id=0){
 		$this->m_pekerjaan->delete_pekerjaan('sn_pekerjaan', $pekerjaan_id);
-
-		$_SESSION['notify']['type'] = 'success';
-		$_SESSION['notify']['message'] = 'Data pekerjaan berhasil dihapus.';
+		
+		$this->session->set_flashdata('type', 'success');
+		$this->session->set_flashdata('message', 'Data pendidikan berhasil dihapus.');
 
 		header('location:'.$_SERVER['HTTP_REFERER']);
 	}

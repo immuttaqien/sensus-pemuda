@@ -8,6 +8,7 @@ class Anggota extends CI_Controller {
 		parent::__construct();
 		$this->load->model('m_anggota');
 		$this->load->model('m_formulir');
+		$this->load->model('m_riwayat');
 
 		if($this->session->userdata('status') != "login"){
 			redirect(base_url("login"));
@@ -42,8 +43,8 @@ class Anggota extends CI_Controller {
 			'pendidikan' => $this->m_formulir->daftar_pendidikan()->result(),
 			'pendapatan' => $this->m_formulir->daftar_pendapatan()->result(),
 			'tanggungan' => $this->m_formulir->daftar_tanggungan()->result(),
-			'riwayat' => $this->m_formulir->daftar_riwayat($anggota_id)->result(),
-			'detail' => $this->m_anggota->detail_anggota($anggota_id)->result()
+			'riwayat' => $this->m_riwayat->daftar_riwayat($anggota_id)->result(),
+			'detail' => $this->m_anggota->detail_anggota($anggota_id)->row()
 		);
 
 		$this->load->view('content/v_anggota', $data);
@@ -64,30 +65,8 @@ class Anggota extends CI_Controller {
 			'pendidikan' => $this->m_formulir->daftar_pendidikan()->result(),
 			'pendapatan' => $this->m_formulir->daftar_pendapatan()->result(),
 			'tanggungan' => $this->m_formulir->daftar_tanggungan()->result(),
-			'riwayat' => $this->m_formulir->daftar_riwayat($anggota_id)->result(),
-			'edit' => $this->m_anggota->detail_anggota($anggota_id)->result()
-		);
-
-		$this->load->view('content/v_anggota', $data);
-		$this->load->view('template/v_footer');
-	}
-
-	public function riwayat()
-	{
-		$this->load->view('template/v_meta');
-		$this->load->view('template/v_header');
-		$this->load->view('template/v_menu');
-
-		$page = $this->uri->segment('3');
-		$anggota_id = $this->uri->segment('4');
-		$riwayat_id = $this->uri->segment('5');
-
-		$data = array(
-			'page' => $page.'_riwayat',
-			'anggota_id' => $anggota_id,
-			'riwayat_id' => $riwayat_id,
-			'pendidikan' => $this->m_formulir->daftar_pendidikan()->result(),
-			'edit' => $this->m_formulir->edit_riwayat($riwayat_id)->result()
+			'riwayat' => $this->m_riwayat->daftar_riwayat($anggota_id)->result(),
+			'edit' => $this->m_anggota->detail_anggota($anggota_id)->row()
 		);
 
 		$this->load->view('content/v_anggota', $data);
@@ -126,10 +105,10 @@ class Anggota extends CI_Controller {
 		$jumlah_anak = $this->input->post('jumlah_anak');
 		$old_foto = $this->input->post('old_foto');
 
-		$cek_nomor = $this->m_anggota->cek_nomor($nomor_anggota, $anggota_id);
+		$cek_nomor = $this->m_anggota->cek_nomor($nomor_anggota, $anggota_id)->num_rows();
 		if($cek_nomor > 0){
-			$_SESSION['notify']['type'] = 'danger';
-			$_SESSION['notify']['message'] = 'Nomor anggota sudah dipakai, silakan cek kembali.';
+			$this->session->set_flashdata('type', 'danger');
+			$this->session->set_flashdata('message', 'Nomor anggota sudah dipakai, silakan cek kembali.');
 
 			header('location:'.$_SERVER['HTTP_REFERER']); die();
 		}
@@ -142,8 +121,8 @@ class Anggota extends CI_Controller {
 			$this->load->library('upload', $config);
 			 
 			if ( ! $this->upload->do_upload('foto')){
-				$_SESSION['notify']['type'] = 'danger';
-				$_SESSION['notify']['message'] = 'Terjadi kesalahan saat upload foto, silakan ulangi lagi.';
+				$this->session->set_flashdata('type', 'danger');
+				$this->session->set_flashdata('message', 'Terjadi kesalahan saat upload foto, silakan ulangi lagi.');
 
 				header('location:'.$_SERVER['HTTP_REFERER']); die();
 			}else{
@@ -186,21 +165,21 @@ class Anggota extends CI_Controller {
 
 		$this->m_anggota->update_anggota('sn_anggota', $data, $anggota_id);
 
-		$_SESSION['notify']['type'] = 'success';
-		$_SESSION['notify']['message'] = 'Data anggota berhasil diedit.';
+		$this->session->set_flashdata('type', 'success');
+		$this->session->set_flashdata('message', 'Data anggota berhasil diedit.');
 
 		header('location:'.$_SERVER['HTTP_REFERER']);
 	}
 
 	public function hapus_anggota($anggota_id=0){
-		$foto = $this->m_anggota->get_foto($anggota_id);
+		$foto = $this->m_anggota->get_foto($anggota_id)->row();
 		unlink('./media/foto/'.$foto->foto);
 
 		$this->m_anggota->delete_anggota('sn_anggota', $anggota_id);
 		$this->m_anggota->delete_riwayat('sn_riwayat', $anggota_id);
 
-		$_SESSION['notify']['type'] = 'success';
-		$_SESSION['notify']['message'] = 'Data anggota berhasil dihapus.';
+		$this->session->set_flashdata('type', 'success');
+		$this->session->set_flashdata('message', 'Data anggota berhasil dihapus.');
 
 		header('location:'.$_SERVER['HTTP_REFERER']);
 	}

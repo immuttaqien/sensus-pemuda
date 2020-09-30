@@ -57,139 +57,65 @@ class Formulir extends CI_Controller {
 		$anggota_otonom = $this->input->post('anggota_otonom');
 		$jumlah_anak = $this->input->post('jumlah_anak');
 
-		$cek_nomor = $this->m_formulir->cek_nomor($nomor_anggota);
+		$cek_nomor = $this->m_formulir->cek_nomor($nomor_anggota)->num_rows();
 		if($cek_nomor > 0){
-			$_SESSION['notify']['type'] = 'danger';
-			$_SESSION['notify']['message'] = 'Nomor anggota sudah dipakai, silakan cek kembali.';
+			$this->session->set_flashdata('type', 'danger');
+			$this->session->set_flashdata('message', 'Nomor anggota sudah dipakai, silakan cek kembali.');
 
 			header('location:'.$_SERVER['HTTP_REFERER']); die();
 		}
 
-		$config['upload_path'] = './media/foto/';
-		$config['allowed_types'] = 'gif|jpg|png';
-		$config['encrypt_name'] = true;
-		 
-		$this->load->library('upload', $config);
-		 
-		if ( ! $this->upload->do_upload('foto')){
-			$_SESSION['notify']['type'] = 'danger';
-			$_SESSION['notify']['message'] = 'Terjadi kesalahan saat upload foto, silakan ulangi lagi.';
+		if(isset($_FILES['foto']['name']) && $_FILES['foto']['tmp_name']){
+			$config['upload_path'] = './media/foto/';
+			$config['allowed_types'] = 'gif|jpg|png';
+			$config['encrypt_name'] = true;
+			 
+			$this->load->library('upload', $config);
+			 
+			if ( ! $this->upload->do_upload('foto')){
+				$_SESSION['notify']['type'] = 'danger';
+				$_SESSION['notify']['message'] = 'Terjadi kesalahan saat upload foto, silakan ulangi lagi.';
 
-			header('location:'.$_SERVER['HTTP_REFERER']);
-		}else{
-			$foto = $this->upload->data('file_name');
-
-			$data = array(
-				'nomor_anggota' => $nomor_anggota,
-				'nama_lengkap' => $nama_lengkap,
-				'tempat_lahir' => $tempat_lahir,
-				'tanggal_lahir' => $tanggal_lahir,
-				'status_nikah' => $status_nikah,
-				'golongan_darah' => $golongan_darah,
-				'email' => $email,
-				'telepon' => $telepon,
-				'whatsapp' => $whatsapp,
-				'alamat' => $alamat,
-				'nomor_ktp' => $nomor_ktp,
-				'tahun_masuk' => $tahun_masuk,
-				'jamaah_id' => $jamaah,
-				'hobi' => $hobi,
-				'keahlian' => $keahlian,
-				'pekerjaan_id' => $pekerjaan,
-				'pekerjaan_lain' => $pekerjaan_lain,
-				'nama_instansi' => $nama_instansi,
-				'sampingan' => $sampingan,
-				'pekerjaan_sampingan' => $pekerjaan_sampingan,
-				'pendidikan_id' => $pendidikan,
-				'pendapatan_id' => $pendapatan,
-				'tanggungan_id' => $tanggungan,
-				'organisasi_lain' => $organisasi_lain,
-				'nama_organisasi' => $nama_organisasi,
-				'nama_istri' => $nama_istri,
-				'anggota_otonom' => $anggota_otonom,
-				'jumlah_anak' => $jumlah_anak,
-				'foto' => $foto
-			);
-
-			$anggota_id = $this->m_formulir->input_anggota('sn_anggota', $data);
-
-			redirect('formulir/riwayat/index/'.$anggota_id);
-		}
-	}
-
-	public function riwayat()
-	{
-		$this->load->view('template/v_meta');
-		$this->load->view('template/v_logo');
-
-		$anggota_id = $this->uri->segment('4');
-		$riwayat_id = $this->uri->segment('5');
+				header('location:'.$_SERVER['HTTP_REFERER']); die();
+			}else{
+				$foto = $this->upload->data('file_name');
+			}
+		}else $foto = NULL;		
 
 		$data = array(
-			'riwayat' => $this->m_formulir->daftar_riwayat($anggota_id)->result(),
-			'pendidikan' => $this->m_formulir->daftar_pendidikan()->result(),
-			'edit' => $this->m_formulir->edit_riwayat($riwayat_id)->result()
-		);
-
-		$this->load->view('content/v_riwayat', $data);
-		$this->load->view('template/v_footer');
-	}
-
-	public function tambah_riwayat($anggota_id=0)
-	{
-		$tingkat = $this->input->post('tingkat');
-		$nama_sekolah = $this->input->post('nama_sekolah');
-		$jurusan = $this->input->post('jurusan');
-		$tahun_masuk = $this->input->post('tahun_masuk');
-		$tahun_lulus = $this->input->post('tahun_lulus');
-
-		$data = array(
-			'anggota_id' => $anggota_id,
-			'pendidikan_id' => $tingkat,
-			'nama_sekolah' => $nama_sekolah,
-			'jurusan' => $jurusan,
+			'nomor_anggota' => $nomor_anggota,
+			'nama_lengkap' => $nama_lengkap,
+			'tempat_lahir' => $tempat_lahir,
+			'tanggal_lahir' => $tanggal_lahir,
+			'status_nikah' => $status_nikah,
+			'golongan_darah' => $golongan_darah,
+			'email' => $email,
+			'telepon' => $telepon,
+			'whatsapp' => $whatsapp,
+			'alamat' => $alamat,
+			'nomor_ktp' => $nomor_ktp,
 			'tahun_masuk' => $tahun_masuk,
-			'tahun_lulus' => $tahun_lulus
+			'jamaah_id' => $jamaah,
+			'hobi' => $hobi,
+			'keahlian' => $keahlian,
+			'pekerjaan_id' => $pekerjaan,
+			'pekerjaan_lain' => $pekerjaan_lain,
+			'nama_instansi' => $nama_instansi,
+			'sampingan' => $sampingan,
+			'pekerjaan_sampingan' => $pekerjaan_sampingan,
+			'pendidikan_id' => $pendidikan,
+			'pendapatan_id' => $pendapatan,
+			'tanggungan_id' => $tanggungan,
+			'organisasi_lain' => $organisasi_lain,
+			'nama_organisasi' => $nama_organisasi,
+			'nama_istri' => $nama_istri,
+			'anggota_otonom' => $anggota_otonom,
+			'jumlah_anak' => $jumlah_anak,
+			'foto' => $foto
 		);
 
-		$this->m_formulir->input_riwayat('sn_riwayat', $data);
+		$anggota_id = $this->m_formulir->input_anggota('sn_anggota', $data);
 
-		$_SESSION['notify']['type'] = 'success';
-		$_SESSION['notify']['message'] = 'Data riwayat pendidikan berhasil ditambahkan.';
-
-		header('location:'.$_SERVER['HTTP_REFERER']);
-	}
-
-	public function edit_riwayat($riwayat_id=0)
-	{
-		$tingkat = $this->input->post('tingkat');
-		$nama_sekolah = $this->input->post('nama_sekolah');
-		$jurusan = $this->input->post('jurusan');
-		$tahun_masuk = $this->input->post('tahun_masuk');
-		$tahun_lulus = $this->input->post('tahun_lulus');
-
-		$data = array(
-			'pendidikan_id' => $tingkat,
-			'nama_sekolah' => $nama_sekolah,
-			'jurusan' => $jurusan,
-			'tahun_masuk' => $tahun_masuk,
-			'tahun_lulus' => $tahun_lulus
-		);
-
-		$this->m_formulir->update_riwayat('sn_riwayat', $data, $riwayat_id);
-
-		$_SESSION['notify']['type'] = 'success';
-		$_SESSION['notify']['message'] = 'Data riwayat pendidikan berhasil diedit.';
-
-		header('location:'.$_SERVER['HTTP_REFERER']);
-	}
-
-	public function hapus_riwayat($riwayat_id=0){
-		$this->m_formulir->delete_riwayat('sn_riwayat', $riwayat_id);
-
-		$_SESSION['notify']['type'] = 'success';
-		$_SESSION['notify']['message'] = 'Data riwayat pendidikan berhasil dihapus.';
-
-		header('location:'.$_SERVER['HTTP_REFERER']);
+		redirect('riwayat/index/'.$anggota_id);
 	}
 }

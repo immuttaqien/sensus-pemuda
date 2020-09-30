@@ -14,7 +14,7 @@ class M_admin extends CI_Model {
 
 	public function edit_admin($admin_id)
 	{
-		return $this->db->get_where('sn_admin', array('admin_id' => $admin_id))->row();
+		return $this->db->get_where('sn_admin', array('admin_id' => $admin_id));
 	}
 
 	public function update_admin($table, $data, $admin_id)

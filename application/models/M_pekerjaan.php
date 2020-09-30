@@ -14,7 +14,7 @@ class M_pekerjaan extends CI_Model {
 
 	public function edit_pekerjaan($pekerjaan_id)
 	{
-		return $this->db->get_where('sn_pekerjaan', array('pekerjaan_id' => $pekerjaan_id))->row();
+		return $this->db->get_where('sn_pekerjaan', array('pekerjaan_id' => $pekerjaan_id));
 	}
 
 	public function update_pekerjaan($table, $data, $pekerjaan_id)

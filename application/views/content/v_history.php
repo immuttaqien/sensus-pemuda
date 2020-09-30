@@ -5,9 +5,10 @@ switch($page){
 case 'index':
 ?>
 
+<div id="page-wrapper">
 <div class="row">
     <div class="col-lg-12">
-        <h2 class="page-header">Form Inventarisasi Data Pokok Anggota Pemuda Persis Cabang Banjaran <a href="<?php echo base_url('riwayat/tambah/'.$anggota_id) ?>" class="btn btn-primary" style="float:right">+ Tambah</a></h2>
+        <h2 class="page-header">Data Riwayat Pendidikan <a href="<?php echo base_url('history/tambah/'.$anggota_id) ?>" class="btn btn-primary" style="float:right">+ Tambah</a></h2>
     </div>
     <!-- /.col-lg-12 -->
 </div>
@@ -48,7 +49,7 @@ case 'index':
                                     <td>'.$list->jurusan.'</td>
                                     <td>'.$list->tahun_masuk.'</td>
                                     <td>'.$list->tahun_lulus.'</td>
-                                    <td class="center">'.anchor('riwayat/edit/'.$list->riwayat_id, 'Edit').' | '.anchor('riwayat/hapus_riwayat/'.$list->riwayat_id, 'Hapus', 'onclick="return confirm(\'Apakah Anda yakin akan menghapus data riwayat pendidikan ini ?\')"').'</td>
+                                    <td class="center">'.anchor('history/edit/'.$list->riwayat_id, 'Edit').' | '.anchor('riwayat/hapus_riwayat/'.$list->riwayat_id, 'Hapus', 'onclick="return confirm(\'Apakah Anda yakin akan menghapus data riwayat pendidikan ini ?\')"').'</td>
                                  </tr>';
                             $i++;
                         }
@@ -70,9 +71,10 @@ break;
 case 'tambah':
 ?>
 
+<div id="page-wrapper">
 <div class="row">
     <div class="col-lg-12">
-        <h2 class="page-header">Form Inventarisasi Data Pokok Anggota Pemuda Persis Cabang Banjaran <a href="<?php echo base_url('riwayat/index/'.$anggota_id) ?>" class="btn btn-primary" style="float:right"><i class="fa fa-angle-double-left"></i> Kembali</a></h2>
+        <h2 class="page-header">Tambah Data Riwayat Pendidikan <a href="<?php echo base_url('anggota/edit/'.$anggota_id) ?>" class="btn btn-primary" style="float:right"><i class="fa fa-angle-double-left"></i> Kembali</a></h2>
     </div>
     <!-- /.col-lg-12 -->
 </div>
@@ -143,9 +145,10 @@ break;
 case 'edit':
 ?>
 
+<div id="page-wrapper">
 <div class="row">
     <div class="col-lg-12">
-        <h2 class="page-header">Form Inventarisasi Data Pokok Anggota Pemuda Persis Cabang Banjaran <a href="<?php echo base_url('riwayat/index/'.$edit->anggota_id) ?>" class="btn btn-primary" style="float:right"><i class="fa fa-angle-double-left"></i> Kembali</a></h2>
+        <h2 class="page-header">Edit Data Riwayat Pendidikan <a href="<?php echo base_url('anggota/edit/'.$edit->anggota_id) ?>" class="btn btn-primary" style="float:right"><i class="fa fa-angle-double-left"></i> Kembali</a></h2>
     </div>
     <!-- /.col-lg-12 -->
 </div>

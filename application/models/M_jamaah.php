@@ -14,7 +14,7 @@ class M_jamaah extends CI_Model {
 
 	public function edit_jamaah($jamaah_id)
 	{
-		return $this->db->get_where('sn_jamaah', array('jamaah_id' => $jamaah_id))->row();
+		return $this->db->get_where('sn_jamaah', array('jamaah_id' => $jamaah_id));
 	}
 
 	public function update_jamaah($table, $data, $jamaah_id)

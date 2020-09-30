@@ -14,7 +14,7 @@ class M_pendidikan extends CI_Model {
 
 	public function edit_pendidikan($pendidikan_id)
 	{
-		return $this->db->get_where('sn_pendidikan', array('pendidikan_id' => $pendidikan_id))->row();
+		return $this->db->get_where('sn_pendidikan', array('pendidikan_id' => $pendidikan_id));
 	}
 
 	public function update_pendidikan($table, $data, $pendidikan_id)

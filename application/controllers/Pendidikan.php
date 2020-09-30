@@ -51,7 +51,7 @@ class Pendidikan extends CI_Controller {
 		$data = array(
 			'page' => 'edit',
 			'pendidikan_id' => $pendidikan_id,
-			'edit' => $this->m_pendidikan->edit_pendidikan($pendidikan_id)
+			'edit' => $this->m_pendidikan->edit_pendidikan($pendidikan_id)->row()
 		);
 
 		$this->load->view('content/v_pendidikan', $data);
@@ -68,8 +68,8 @@ class Pendidikan extends CI_Controller {
 
 		$this->m_pendidikan->input_pendidikan('sn_pendidikan', $data);
 
-		$_SESSION['notify']['type'] = 'success';
-		$_SESSION['notify']['message'] = 'Data pendidikan berhasil ditambah.';
+		$this->session->set_flashdata('type', 'success');
+		$this->session->set_flashdata('message', 'Data pendidikan berhasil ditambah.');
 
 		header('location:'.$_SERVER['HTTP_REFERER']);
 	}
@@ -83,18 +83,18 @@ class Pendidikan extends CI_Controller {
 		);
 
 		$this->m_pendidikan->update_pendidikan('sn_pendidikan', $data, $pendidikan_id);
-
-		$_SESSION['notify']['type'] = 'success';
-		$_SESSION['notify']['message'] = 'Data pendidikan berhasil diedit.';
+		
+		$this->session->set_flashdata('type', 'success');
+		$this->session->set_flashdata('message', 'Data pendidikan berhasil diedit.');
 
 		header('location:'.$_SERVER['HTTP_REFERER']);
 	}
 
 	public function hapus_pendidikan($pendidikan_id=0){
 		$this->m_pendidikan->delete_pendidikan('sn_pendidikan', $pendidikan_id);
-
-		$_SESSION['notify']['type'] = 'success';
-		$_SESSION['notify']['message'] = 'Data pendidikan berhasil dihapus.';
+		
+		$this->session->set_flashdata('type', 'success');
+		$this->session->set_flashdata('message', 'Data pendidikan berhasil dihapus.');
 
 		header('location:'.$_SERVER['HTTP_REFERER']);
 	}

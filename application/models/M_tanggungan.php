@@ -14,7 +14,7 @@ class M_tanggungan extends CI_Model {
 
 	public function edit_tanggungan($tanggungan_id)
 	{
-		return $this->db->get_where('sn_tanggungan', array('tanggungan_id' => $tanggungan_id))->row();
+		return $this->db->get_where('sn_tanggungan', array('tanggungan_id' => $tanggungan_id));
 	}
 
 	public function update_tanggungan($table, $data, $tanggungan_id)

@@ -51,7 +51,7 @@ class Pendapatan extends CI_Controller {
 		$data = array(
 			'page' => 'edit',
 			'pendapatan_id' => $pendapatan_id,
-			'edit' => $this->m_pendapatan->edit_pendapatan($pendapatan_id)
+			'edit' => $this->m_pendapatan->edit_pendapatan($pendapatan_id)->row()
 		);
 
 		$this->load->view('content/v_pendapatan', $data);
@@ -67,9 +67,9 @@ class Pendapatan extends CI_Controller {
 		);
 
 		$this->m_pendapatan->input_pendapatan('sn_pendapatan', $data);
-
-		$_SESSION['notify']['type'] = 'success';
-		$_SESSION['notify']['message'] = 'Data pendapatan berhasil ditambah.';
+		
+		$this->session->set_flashdata('type', 'success');
+		$this->session->set_flashdata('message', 'Data pendapatan berhasil ditambah.');
 
 		header('location:'.$_SERVER['HTTP_REFERER']);
 	}
@@ -83,18 +83,18 @@ class Pendapatan extends CI_Controller {
 		);
 
 		$this->m_pendapatan->update_pendapatan('sn_pendapatan', $data, $pendapatan_id);
-
-		$_SESSION['notify']['type'] = 'success';
-		$_SESSION['notify']['message'] = 'Data pendapatan berhasil diedit.';
+		
+		$this->session->set_flashdata('type', 'success');
+		$this->session->set_flashdata('message', 'Data pendapatan berhasil diedit.');
 
 		header('location:'.$_SERVER['HTTP_REFERER']);
 	}
 
 	public function hapus_pendapatan($pendapatan_id=0){
 		$this->m_pendapatan->delete_pendapatan('sn_pendapatan', $pendapatan_id);
-
-		$_SESSION['notify']['type'] = 'success';
-		$_SESSION['notify']['message'] = 'Data pendapatan berhasil dihapus.';
+		
+		$this->session->set_flashdata('type', 'success');
+		$this->session->set_flashdata('message', 'Data pendapatan berhasil dihapus.');
 
 		header('location:'.$_SERVER['HTTP_REFERER']);
 	}

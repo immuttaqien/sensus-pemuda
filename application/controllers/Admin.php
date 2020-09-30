@@ -51,7 +51,7 @@ class Admin extends CI_Controller {
 		$data = array(
 			'page' => 'edit',
 			'admin_id' => $admin_id,
-			'edit' => $this->m_admin->edit_admin($admin_id)
+			'edit' => $this->m_admin->edit_admin($admin_id)->row()
 		);
 
 		$this->load->view('content/v_admin', $data);
@@ -73,12 +73,12 @@ class Admin extends CI_Controller {
 			);
 
 			$this->m_admin->input_admin('sn_admin', $data);
-
-			$_SESSION['notify']['type'] = 'success';
-			$_SESSION['notify']['message'] = 'Data admin berhasil ditambah.';
-		}else{
-			$_SESSION['notify']['type'] = 'danger';
-			$_SESSION['notify']['message'] = 'Password tidak sama.';
+		
+			$this->session->set_flashdata('type', 'success');
+			$this->session->set_flashdata('message', 'Data admin berhasil ditambah.');
+		}else{		
+			$this->session->set_flashdata('type', 'danger');
+			$this->session->set_flashdata('message', 'Password tidak sama.');
 		}
 
 		header('location:'.$_SERVER['HTTP_REFERER']);
@@ -100,9 +100,9 @@ class Admin extends CI_Controller {
 				);			
 
 				$this->m_admin->update_admin('sn_admin', $data, $admin_id);	
-			}else{
-				$_SESSION['notify']['type'] = 'danger';
-				$_SESSION['notify']['message'] = 'Password tidak sama.';
+			}else{	
+				$this->session->set_flashdata('type', 'danger');
+				$this->session->set_flashdata('message', 'Password tidak sama.');
 
 				header('location:'.$_SERVER['HTTP_REFERER']); die();
 			}
@@ -114,18 +114,18 @@ class Admin extends CI_Controller {
 
 			$this->m_admin->update_admin('sn_admin', $data, $admin_id);
 		}
-
-		$_SESSION['notify']['type'] = 'success';
-		$_SESSION['notify']['message'] = 'Data admin berhasil diedit.';
+		
+		$this->session->set_flashdata('type', 'success');
+		$this->session->set_flashdata('message', 'Data admin berhasil diedit.');
 
 		header('location:'.$_SERVER['HTTP_REFERER']);
 	}
 
 	public function hapus_admin($admin_id=0){
 		$this->m_admin->delete_admin('sn_admin', $admin_id);
-
-		$_SESSION['notify']['type'] = 'success';
-		$_SESSION['notify']['message'] = 'Data admin berhasil dihapus.';
+		
+		$this->session->set_flashdata('type', 'success');
+		$this->session->set_flashdata('message', 'Data admin berhasil dihapus.');
 
 		header('location:'.$_SERVER['HTTP_REFERER']);
 	}

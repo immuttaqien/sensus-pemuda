@@ -51,7 +51,7 @@ class Tanggungan extends CI_Controller {
 		$data = array(
 			'page' => 'edit',
 			'tanggungan_id' => $tanggungan_id,
-			'edit' => $this->m_tanggungan->edit_tanggungan($tanggungan_id)
+			'edit' => $this->m_tanggungan->edit_tanggungan($tanggungan_id)->row()
 		);
 
 		$this->load->view('content/v_tanggungan', $data);
@@ -67,9 +67,9 @@ class Tanggungan extends CI_Controller {
 		);
 
 		$this->m_tanggungan->input_tanggungan('sn_tanggungan', $data);
-
-		$_SESSION['notify']['type'] = 'success';
-		$_SESSION['notify']['message'] = 'Data tanggungan berhasil ditambah.';
+		
+		$this->session->set_flashdata('type', 'success');
+		$this->session->set_flashdata('message', 'Data tanggungan berhasil ditambah.');
 
 		header('location:'.$_SERVER['HTTP_REFERER']);
 	}
@@ -83,18 +83,18 @@ class Tanggungan extends CI_Controller {
 		);
 
 		$this->m_tanggungan->update_tanggungan('sn_tanggungan', $data, $tanggungan_id);
-
-		$_SESSION['notify']['type'] = 'success';
-		$_SESSION['notify']['message'] = 'Data tanggungan berhasil diedit.';
+		
+		$this->session->set_flashdata('type', 'success');
+		$this->session->set_flashdata('message', 'Data tanggungan berhasil diedit.');
 
 		header('location:'.$_SERVER['HTTP_REFERER']);
 	}
 
 	public function hapus_tanggungan($tanggungan_id=0){
 		$this->m_tanggungan->delete_tanggungan('sn_tanggungan', $tanggungan_id);
-
-		$_SESSION['notify']['type'] = 'success';
-		$_SESSION['notify']['message'] = 'Data tanggungan berhasil dihapus.';
+		
+		$this->session->set_flashdata('type', 'success');
+		$this->session->set_flashdata('message', 'Data tanggungan berhasil dihapus.');
 
 		header('location:'.$_SERVER['HTTP_REFERER']);
 	}

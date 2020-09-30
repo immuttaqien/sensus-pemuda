@@ -16,9 +16,8 @@ case 'index':
 <div class="row">
     <div class="col-lg-12">
         <?php
-        if(isset($_SESSION['notify'])){
-            echo '<div class="alert alert-'.$_SESSION['notify']['type'].' alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>'.$_SESSION['notify']['message'].'</div>';
-            unset($_SESSION['notify']);
+        if($this->session->flashdata()){
+            echo '<div class="alert alert-'.$this->session->flashdata('type').' alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>'.$this->session->flashdata('message').'</div>';
         }            
         ?>
         <div class="panel panel-default">
@@ -75,9 +74,8 @@ case 'tambah':
 </div>
 
 <?php
-if(isset($_SESSION['notify'])){
-    echo '<div class="alert alert-'.$_SESSION['notify']['type'].' alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>'.$_SESSION['notify']['message'].'</div>';
-    unset($_SESSION['notify']);
+if($this->session->flashdata()){
+    echo '<div class="alert alert-'.$this->session->flashdata('type').' alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>'.$this->session->flashdata('message').'</div>';
 }            
 ?>
 <!-- /.row -->
@@ -138,9 +136,8 @@ case 'edit':
 </div>
 
 <?php
-if(isset($_SESSION['notify'])){
-    echo '<div class="alert alert-'.$_SESSION['notify']['type'].' alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>'.$_SESSION['notify']['message'].'</div>';
-    unset($_SESSION['notify']);
+if($this->session->flashdata()){
+    echo '<div class="alert alert-'.$this->session->flashdata('type').' alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>'.$this->session->flashdata('message').'</div>';
 }            
 ?>
 <!-- /.row -->

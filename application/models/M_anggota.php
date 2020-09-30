@@ -14,7 +14,7 @@ class M_anggota extends CI_Model {
 
 	public function cek_nomor($nomor, $anggota_id)
 	{
-		$cek_nomor = $this->db->get_where('sn_anggota', array('nomor_anggota' => $nomor, 'anggota_id !=' => $anggota_id))->num_rows();
+		$cek_nomor = $this->db->get_where('sn_anggota', array('nomor_anggota' => $nomor, 'anggota_id !=' => $anggota_id));
 
 		return $cek_nomor;
 	}
@@ -26,7 +26,7 @@ class M_anggota extends CI_Model {
 
 	public function get_foto($anggota_id)
 	{
-		return $this->db->select('foto')->from('sn_anggota')->where('anggota_id', $anggota_id)->get()->row();
+		return $this->db->select('foto')->from('sn_anggota')->where('anggota_id', $anggota_id)->get();
 	}
 
 	public function delete_anggota($table, $anggota_id){
