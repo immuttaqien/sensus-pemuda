@@ -30,6 +30,9 @@
               </ul>
               <!-- /.nav-second-level -->
           </li>
+          <li>
+              <a href="<?php echo base_url('admin') ?>"><i class="fa fa-user fa-fw"></i> Admin</a>
+          </li>
       </ul>
   </div>
   <!-- /.sidebar-collapse -->
