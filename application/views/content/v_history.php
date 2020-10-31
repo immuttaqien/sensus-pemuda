@@ -74,7 +74,7 @@ case 'tambah':
 <div id="page-wrapper">
 <div class="row">
     <div class="col-lg-12">
-        <h2 class="page-header">Tambah Data Riwayat Pendidikan <a href="<?php echo base_url('anggota/edit/'.$anggota_id) ?>" class="btn btn-primary" style="float:right"><i class="fa fa-angle-double-left"></i> Kembali</a></h2>
+        <h2 class="page-header">Tambah Data Riwayat Pendidikan <a href="<?php echo base_url('history/index/'.$anggota_id) ?>" class="btn btn-primary" style="float:right"><i class="fa fa-angle-double-left"></i> Kembali</a></h2>
     </div>
     <!-- /.col-lg-12 -->
 </div>
@@ -148,7 +148,7 @@ case 'edit':
 <div id="page-wrapper">
 <div class="row">
     <div class="col-lg-12">
-        <h2 class="page-header">Edit Data Riwayat Pendidikan <a href="<?php echo base_url('anggota/edit/'.$edit->anggota_id) ?>" class="btn btn-primary" style="float:right"><i class="fa fa-angle-double-left"></i> Kembali</a></h2>
+        <h2 class="page-header">Edit Data Riwayat Pendidikan <a href="<?php echo base_url('history/index/'.$edit->anggota_id) ?>" class="btn btn-primary" style="float:right"><i class="fa fa-angle-double-left"></i> Kembali</a></h2>
     </div>
     <!-- /.col-lg-12 -->
 </div>
