@@ -16,7 +16,7 @@
 
 <div id="page-wrapper" style="margin: 0">
     <div class="row">
-        <div class="col-md-3 col-md-offset-5" style="padding-left: 3%; margin-top: 20px;">
+        <div class="col-md-4 col-md-offset-4" style="margin-top: 20px; text-align: center;">
             <a href="<?php echo base_url() ?>" class="logo"><img src="<?php echo base_url('static/img/logo.png') ?>" width="120"></a>
         </div>
         <div class="col-md-6 col-md-offset-3">

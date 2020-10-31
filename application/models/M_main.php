@@ -31,4 +31,9 @@ class M_main extends CI_Model {
 	{
 		return $this->db->get('sn_tanggungan')->num_rows();
 	}
+
+	public function stat_jamaah()
+	{
+		return $this->db->select('a.nama AS jamaah, COUNT(b.anggota_id) AS jumlah')->from('sn_jamaah a')->join('sn_anggota b', 'b.jamaah_id = a.jamaah_id', 'left')->group_by('a.jamaah_id')->order_by('a.jamaah_id', 'ASC')->get();
+	}
 }

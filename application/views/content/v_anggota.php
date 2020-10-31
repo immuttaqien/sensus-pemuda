@@ -125,7 +125,10 @@ if($this->session->flashdata()){
                                 <label>Golongan Darah</label>
                                 <div class="radio">
                                     <label class="radio-inline">
-                                        <input type="radio" name="golongan_darah" value="A+" checked=""> A+
+                                        <input type="radio" name="golongan_darah" value="-" checked=""> -
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="golongan_darah" value="A+"> A+
                                     </label>
                                     <label class="radio-inline">
                                         <input type="radio" name="golongan_darah" value="A-"> A-
@@ -373,6 +376,9 @@ if($this->session->flashdata()){
                         <div class="form-group">
                             <label>Golongan Darah</label>
                             <div class="radio">
+                                <label class="radio-inline">
+                                    <input disabled="" type="radio" name="golongan_darah" value="-" <?php if($detail->golongan_darah=='-') echo ' checked'; ?>> -
+                                </label>
                                 <label class="radio-inline">
                                     <input disabled="" type="radio" name="golongan_darah" value="A+" <?php if($detail->golongan_darah=='A+') echo ' checked'; ?>> A+
                                 </label>
@@ -660,6 +666,9 @@ if($this->session->flashdata()){
                             <div class="form-group">
                                 <label>Golongan Darah</label>
                                 <div class="radio">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="golongan_darah" value="-" <?php if($edit->golongan_darah=='-') echo ' checked'; ?>> -
+                                    </label>
                                     <label class="radio-inline">
                                         <input type="radio" name="golongan_darah" value="A+" <?php if($edit->golongan_darah=='A+') echo ' checked'; ?>> A+
                                     </label>

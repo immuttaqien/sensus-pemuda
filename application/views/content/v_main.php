@@ -145,3 +145,42 @@
         </div>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Data Jamaah
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Jamaah</th>
+                            <th>Jumlah Anggota</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $i = 1;
+                        foreach($stat_jamaah as $list){
+                            echo '<tr>
+                                    <td class="center" width="10">'.$i.'</td>
+                                    <td>'.$list->jamaah.'</td>
+                                    <td class="center">'.$list->jumlah.'</td>
+                                 </tr>';
+                            $i++;
+                        }
+                        ?>
+                    </tbody>
+                </table>
+                <!-- /.table-responsive -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>

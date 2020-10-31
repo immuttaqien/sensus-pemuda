@@ -123,13 +123,13 @@ class Anggota extends CI_Controller {
 		$anggota_otonom = $this->input->post('anggota_otonom');
 		$jumlah_anak = $this->input->post('jumlah_anak');
 
-		$cek_nomor = $this->m_formulir->cek_nomor($nomor_anggota)->num_rows();
-		if($cek_nomor > 0){
-			$this->session->set_flashdata('type', 'danger');
-			$this->session->set_flashdata('message', 'Nomor anggota sudah dipakai, silakan cek kembali.');
+		// $cek_nomor = $this->m_formulir->cek_nomor($nomor_anggota)->num_rows();
+		// if($cek_nomor > 0){
+		// 	$this->session->set_flashdata('type', 'danger');
+		// 	$this->session->set_flashdata('message', 'Nomor anggota sudah dipakai, silakan cek kembali.');
 
-			header('location:'.$_SERVER['HTTP_REFERER']); die();
-		}
+		// 	header('location:'.$_SERVER['HTTP_REFERER']); die();
+		// }
 
 		if(isset($_FILES['foto']['name']) && $_FILES['foto']['tmp_name']){
 			$config['upload_path'] = './media/foto/';
@@ -217,13 +217,13 @@ class Anggota extends CI_Controller {
 		$jumlah_anak = $this->input->post('jumlah_anak');
 		$old_foto = $this->input->post('old_foto');
 
-		$cek_nomor = $this->m_anggota->cek_nomor($nomor_anggota, $anggota_id)->num_rows();
-		if($cek_nomor > 0){
-			$this->session->set_flashdata('type', 'danger');
-			$this->session->set_flashdata('message', 'Nomor anggota sudah dipakai, silakan cek kembali.');
+		// $cek_nomor = $this->m_anggota->cek_nomor($nomor_anggota, $anggota_id)->num_rows();
+		// if($cek_nomor > 0){
+		// 	$this->session->set_flashdata('type', 'danger');
+		// 	$this->session->set_flashdata('message', 'Nomor anggota sudah dipakai, silakan cek kembali.');
 
-			header('location:'.$_SERVER['HTTP_REFERER']); die();
-		}
+		// 	header('location:'.$_SERVER['HTTP_REFERER']); die();
+		// }
 
 		if(isset($_FILES['foto']['name']) && $_FILES['foto']['tmp_name']){
 			$config['upload_path'] = './media/foto/';

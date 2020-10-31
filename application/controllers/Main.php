@@ -25,7 +25,8 @@ class Main extends CI_Controller {
 			'pekerjaan' => $this->m_main->jumlah_pekerjaan(),
 			'pendidikan' => $this->m_main->jumlah_pendidikan(),
 			'pendapatan' => $this->m_main->jumlah_pendapatan(),
-			'tanggungan' => $this->m_main->jumlah_tanggungan()
+			'tanggungan' => $this->m_main->jumlah_tanggungan(),
+			'stat_jamaah' => $this->m_main->stat_jamaah()->result()
 		);
 
 		$this->load->view('content/v_main', $data);
