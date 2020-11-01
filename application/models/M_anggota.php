@@ -2,9 +2,10 @@
 
 class M_anggota extends CI_Model {
 
-	public function daftar_anggota()
+	public function daftar_anggota($jamaah_id)
 	{
-		return $this->db->select('a.*, b.nama AS jamaah')->from('sn_anggota a')->join('sn_jamaah b', 'b.jamaah_id = a.jamaah_id')->get();
+		if($jamaah_id==0) return $this->db->select('a.*, b.nama AS jamaah')->from('sn_anggota a')->join('sn_jamaah b', 'b.jamaah_id = a.jamaah_id')->get();
+		else return $this->db->select('a.*, b.nama AS jamaah')->from('sn_anggota a')->join('sn_jamaah b', 'b.jamaah_id = a.jamaah_id')->where('a.jamaah_id', $jamaah_id)->get();
 	}
 
 	public function detail_anggota($anggota_id)

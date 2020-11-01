@@ -15,7 +15,7 @@ class Anggota extends CI_Controller {
 		}
 	}
 
-	public function index()
+	public function index($jamaah_id=0)
 	{
 		$this->load->view('template/v_meta');
 		$this->load->view('template/v_header');
@@ -23,7 +23,9 @@ class Anggota extends CI_Controller {
 
 		$data = array(
 			'page' => 'index',
-			'anggota' => $this->m_anggota->daftar_anggota()->result()
+			'jamaah_id' => $jamaah_id,
+			'jamaah' => $this->m_formulir->daftar_jamaah()->result(),
+			'anggota' => $this->m_anggota->daftar_anggota($jamaah_id)->result()
 		);
 
 		$this->load->view('content/v_anggota', $data);

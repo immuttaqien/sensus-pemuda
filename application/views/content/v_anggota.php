@@ -8,7 +8,18 @@ case 'index':
 <div id="page-wrapper">
 <div class="row">
     <div class="col-lg-12">
-        <h2 class="page-header">Data Anggota <a href="<?php echo base_url('anggota/tambah') ?>" class="btn btn-primary" style="float:right">+ Tambah</a></h2>
+        <h2 class="page-header">Data Anggota 
+            <a href="<?php echo base_url('anggota/tambah') ?>" class="btn btn-primary" style="float:right">+ Tambah</a> 
+
+            <select class="form-control" onchange="window.location.href='<?php echo base_url('anggota/index/'); ?>'+ this.value" style="width: 12%;margin-right:5px;height:34px;display:inline;float:right">
+            <option value="0">-- Jamaah</option>
+            <?php
+            foreach($jamaah as $j){
+                echo '<option value="'.$j->jamaah_id.'"'; if($j->jamaah_id==$jamaah_id) echo ' selected'; echo '>'.$j->nama.'</option>';
+            }
+            ?>
+            </select>
+        </h2>
     </div>
     <!-- /.col-lg-12 -->
 </div>
