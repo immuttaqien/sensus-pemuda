@@ -1,70 +1,100 @@
-###################
-What is CodeIgniter
-###################
+# Sensus Pemuda
 
-CodeIgniter is an Application Development Framework - a toolkit - for people
-who build web sites using PHP. Its goal is to enable you to develop projects
-much faster than you could if you were writing code from scratch, by providing
-a rich set of libraries for commonly needed tasks, as well as a simple
-interface and logical structure to access these libraries. CodeIgniter lets
-you creatively focus on your project by minimizing the amount of code needed
-for a given task.
+Sistem informasi sensus dan pendataan pemuda berbasis web, dibangun dengan CodeIgniter 3.
 
-*******************
-Release Information
-*******************
+## Tech Stack
 
-This repo contains in-development code for future releases. To download the
-latest stable release please visit the `CodeIgniter Downloads
-<https://codeigniter.com/download>`_ page.
+- **Framework**: CodeIgniter 3
+- **Language**: PHP 5.3.7+
+- **Database**: MySQL
 
-**************************
-Changelog and New Features
-**************************
+## Fitur
 
-You can find a list of all changes for each release in the `user
-guide change log <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/changelog.rst>`_.
+- Pendataan anggota/pemuda
+- Data jamaah
+- Formulir pendaftaran dan pengisian data
+- Data pekerjaan, pendidikan, dan pendapatan
+- Data tanggungan/keluarga
+- Riwayat dan histori data
+- Autentikasi admin
 
-*******************
-Server Requirements
-*******************
+## Struktur Proyek
 
-PHP version 5.6 or newer is recommended.
+```
+application/
+├── controllers/    # Controller (Admin, Anggota, Jamaah, Formulir, dll.)
+├── models/         # Model (M_anggota, M_jamaah, M_formulir, dll.)
+├── views/
+│   ├── content/    # Template halaman utama
+│   ├── template/   # Komponen template reusable
+│   └── errors/     # Halaman error
+├── config/         # Konfigurasi aplikasi dan database
+├── helpers/        # Helper functions
+└── libraries/      # Library tambahan
+system/             # CodeIgniter framework
+media/              # File media upload
+static/             # Aset statis (CSS, JS, gambar)
+```
 
-It should work on 5.3.7 as well, but we strongly advise you NOT to run
-such old versions of PHP, because of potential security and performance
-issues, as well as missing features.
+## Instalasi
 
-************
-Installation
-************
+**Prasyarat**: PHP 5.6+, MySQL, Composer
 
-Please see the `installation section <https://codeigniter.com/user_guide/installation/index.html>`_
-of the CodeIgniter User Guide.
+```bash
+# Clone repository
+git clone https://github.com/immuttaqien/sensus-pemuda.git
+cd sensus-pemuda
 
-*******
-License
-*******
+# Install dependencies
+composer install
+```
 
-Please see the `license
-agreement <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/license.rst>`_.
+**Setup database:**
 
-*********
-Resources
-*********
+1. Buat database baru di MySQL
+2. Import file SQL ke database
+3. Konfigurasi koneksi di `application/config/database.php`:
 
--  `User Guide <https://codeigniter.com/docs>`_
--  `Language File Translations <https://github.com/bcit-ci/codeigniter3-translations>`_
--  `Community Forums <http://forum.codeigniter.com/>`_
--  `Community Wiki <https://github.com/bcit-ci/CodeIgniter/wiki>`_
--  `Community Slack Channel <https://codeigniterchat.slack.com>`_
+```php
+$db['default'] = array(
+    'hostname' => 'localhost',
+    'username' => 'root',
+    'password' => '',
+    'database' => 'nama_database',
+    'dbdriver' => 'mysqli',
+    ...
+);
+```
 
-Report security issues to our `Security Panel <mailto:security@codeigniter.com>`_
-or via our `page on HackerOne <https://hackerone.com/codeigniter>`_, thank you.
+**Konfigurasi aplikasi:**
 
-***************
-Acknowledgement
-***************
+Sesuaikan `application/config/config.php`:
 
-The CodeIgniter team would like to thank EllisLab, all the
-contributors to the CodeIgniter project and you, the CodeIgniter user.
+```php
+$config['base_url'] = 'http://localhost/sensus-pemuda/';
+```
+
+## Menjalankan Aplikasi
+
+Letakkan folder project di direktori web server (misal: `htdocs` untuk XAMPP) dan akses melalui browser:
+
+```
+http://localhost/sensus-pemuda/
+```
+
+## Modul
+
+| Modul | Deskripsi |
+|-------|-----------|
+| Anggota | Pendataan anggota/pemuda |
+| Jamaah | Data jamaah |
+| Formulir | Formulir pendaftaran dan pengisian data |
+| Pekerjaan | Data pekerjaan anggota |
+| Pendidikan | Riwayat pendidikan anggota |
+| Pendapatan | Data pendapatan anggota |
+| Tanggungan | Data tanggungan/keluarga anggota |
+| Riwayat | Histori data anggota |
+
+## Lisensi
+
+[MIT](license.txt)
